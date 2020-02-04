@@ -1,0 +1,70 @@
+---Tuesday, June 18, 2019---
+-created cellMap class which consists of two data structures that hold the same cells.
+-It allows me to access cells by their letter (like it could before) and also access cells in relation to another cell. For example, cellMap.above(c) => d
+
+---Wednesday, June 19, 2019---
+-started using the cellMap class
+-began testing cellMap methods and came across a tricky bug
+-I learned that if you use Array.fill(someObject) it will only pass a reference to the object into each slot of the array. So you have to be careful. It's probably not really supposed to be used with objects.
+-fixed the bug by replacing the nested Array.fill()s in the grid initialization with a nested for loop
+-I learned about circular references in objects when trying to use JSON.stringify() on cells. the traits classes contained a reference to their parent cells
+-I think I am not really using the traits how they are intended to be used (https://www.youtube.com/watch?v=1rBOUyRGQuU&list=PLS8HfBXv9ZWWe8zXrViYbIM2Hhylx8DZx&index=4 @ 13:50) and they arent very intuitive
+-TODO: should probably rework the traits and fix the circular reference
+-thought about starting unit test cases. would help for the new cellMap code. but still don't think it is worth my time yet.
+
+---Sunday, June 23, 2019---
+-I am experimenting with traits and abilities. right now traits are time based behaviours which have an update function. Abilities are functions that change state when called
+-hmm interesting problem when trying to create multiply function. i think this is the gorilla and the banana problem (https://medium.com/code-monkey/object-composition-in-javascript-2f9b9077b5e6). The 'creature' would need access to the cell, cellMap, and its own creature factory
+-i think I will pass in cell and cell map, but the creature factory will be stored in the creature. because it makes sense that the creature could reproduce.. asexually. It could also reset itself this Wednesday
+-TODO: theres weird behavior where theres an unexpected delay for the first attack sound
+
+---Sunday, June 30, 2019---
+-found good tips for performace optimization (https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Optimizing_canvas)
+-TODO: make drawImage calls not scale images, that means they only take two parameters. And do the rest of the performance optimization tips in the article above
+-Got font and dashboard working, I am getting a little concerned about performance here because my fan is starting to run. Maybe its unrelated, but maybe optimization efforts should focus here first (on font and dashboard)
+
+---Tuesday, July 16, 2019---
+-created new branch "big-canvas" (even though its actually smaller) for expirimentaion
+-decided on 640x360 (16:9) canvas size with 32x32 sprites. Based on research and experimentation, I've come to the conclusion that pixel art can always scale up, but it can't scale down.
+
+---Monday, July 22, 2019---
+-bug fix: determined that sprite height doesn't have to be a power of two, but it does have to be even otherwise it was blurry. Well that was when I was dividing height by 2, I am guessing that's what caused the problem.
+-TODO: shadows, letters, grass, colors,
+-TODO: implement/experiment with behavior where less creatures spawn if there are already many creatures on the board
+
+---Saturday, January 18, 2020---
+-passing player to cell interaction function so cell can modify player state (damage player if an empty key was pressed, increase their score if a creature was killed)
+-added scoreValue to creature json, so killing different types of creatures can result in different increments of player's score
+-changed isFriendly attribute of creatures to 'type'. so far types are "plant" or "enemy" plants decay, and need to be fed and don't increase score if killed. creatures can be killed, and will increase player's score by their scoreValue.
+-TODO: look into chrome memory usage? make sure cell.reset() is allowing objects to be garbage collected.
+
+---Monday, January 20, 2020---
+-moved files, game restart
+-creating lose menu, ability to display different menus
+-pause and game over pretty much fully functional!
+-TODO: level selection IDEA: use keyboard layout for level selection? maybe even other menus?
+-move key mappings to a different file? clean up?
+-IDEA: NAMES: 1) Key Stroke 2) Key Kommand 
+-IDEA: can assign specials to different combinations of keys
+-IDEA: more futuristic computery style
+-IDEA: ask ergodox to promote?
+
+---Wedesday, Jan 22, 2020---
+-added larger font for heading, might want to add two font sizes in the same font class?
+-main menu and quit function
+-TODO: 100 vs 99 timer on start screen
+
+---Wednesday, Jan 29, 2020---
+-level selection
+-menus background
+-TODO: revisit variance to be more like tontie -- less regular, more gaps, then 3 come at once, then a pause, etc.
+-experimenting with above item in level2.json
+
+---Sunday, Feb 2, 2020---
+-spawn cluster
+-TODO: "cell: {i:9, j:2} bug" the cluster spawn code is causing a bug sometimes, run level with bunbun to reproduce
+-TODO: tiles that show statuses
+-TODO: attack animations
+-TODO: implement protect
+-TODO: rename jsons to -frameData.json
+
